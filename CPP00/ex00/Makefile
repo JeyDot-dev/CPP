@@ -102,7 +102,20 @@ fclean	:
 re		:	fclean all
 			echo "\033[5;33m \t\tALL RECOMPILED !!! $(RST)"
 test	:	all
-			./$(NAME)
+			echo "$(RED)\tALL TESTS ARE PIPED TO CAT -e$(RST)"
+			echo "$(BRN)\ttesting ./$(NAME) Wow \"This\" is a \"\" nice \"test\" $(RST)"
+			./$(NAME) Wow "This" is a "" nice "test" | cat -e
+			echo "$(BRN)\ttesting ./$(NAME) \"\"\"\"\"\"\"$(RST)"
+			./$(NAME) """""""" | cat -e
+			echo "$(BRN)\ttesting ./$(NAME) simple test $(RST)"
+			./$(NAME) simple test | cat -e
+			echo "$(BRN)\ttesting ./$(NAME) \"\" $(RST)"
+			./$(NAME) "" | cat -e
+			echo "$(BRN)\ttesting ./$(NAME) 't T * 0 98 # e E s T ;'$(RST)"
+			./$(NAME) 't T * 0 98 # e E s T ;' | cat -e
+			echo "$(BRN)\ttesting ./$(NAME)$(RST)"
+			./$(NAME) | cat -e
+
 
 .PHONY	:	all clean fclean re test
 .SILENT :
