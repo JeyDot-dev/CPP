@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:20:27 by jsousa-a          #+#    #+#             */
-/*   Updated: 2024/01/19 18:45:06 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2024/01/19 20:19:24 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "HumanA.hpp"
@@ -26,6 +26,7 @@ int main()
 		Weapon club = Weapon("crude spiked club");
 
 		HumanB jim("Jim");
+		jim.attack();
 		jim.setWeapon(club);
 		jim.attack();
 		club.setType("some other type of club");

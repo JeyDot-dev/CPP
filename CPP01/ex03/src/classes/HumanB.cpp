@@ -6,14 +6,17 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:14:48 by jsousa-a          #+#    #+#             */
-/*   Updated: 2024/01/19 20:10:18 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2024/01/19 20:16:20 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "HumanB.hpp"
 
 void	HumanB::attack(void)			const
 {
-	std::cout << this->_name << " attacks with " << this->_weapon->getType() << std::endl;
+	if (this->_weapon == NULL)
+		std::cout << this->_name << " attacks with his bare hands" << std::endl;
+	else
+		std::cout << this->_name << " attacks with " << this->_weapon->getType() << std::endl;
 }
 
 void	HumanB::equipped_info(void)		const
