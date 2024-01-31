@@ -9,7 +9,7 @@ PUR	= \033[35m
 CYN	= \033[36m
 LGR	= \033[37m
 RST	= \033[0m
-NAME		:=	Hi_me_brain
+NAME		:=	Codex
 UNAME_S 	:= $(shell uname -s)
 #---------------Directories----------------------
 SRC_D		:=	src/
@@ -18,7 +18,8 @@ LIB_D		:=
 INC			:=	inc/ inc/classes/
 #---------------Add .c / .h here \/--------------
 SRC			:=	main.cpp
-SRC_CLASSES	:=	AMateria.cpp
+SRC_CLASSES	:=	AMateria.cpp Cure.cpp Ice.cpp Character.cpp\
+				MateriaSource.cpp
 LIB			:=
 FRAMEWORK	:=
 #------------------------------------------------
