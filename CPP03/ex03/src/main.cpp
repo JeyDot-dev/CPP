@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:37:08 by jsousa-a          #+#    #+#             */
-/*   Updated: 2024/01/24 20:22:25 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:27:13 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "DiamondTrap.hpp"
@@ -22,10 +22,10 @@ void	press_a_key(std::string name)
 	}
 	std::cin.ignore();
 }
-void	test_energy(ClapTrap& trap, std::string name, int energy)
+void	test_energy(ClapTrap& trap, int energy)
 {
 	std::string	user_a;
-	std::cout << " ---\n>Would you like to test the energy of a " << name << "?" <<
+	std::cout << " ---\n>Would you like to test the energy of " << trap.getName() << "?" <<
 	"(" << energy * 2 << " lines) y\\n : " << std::flush;
 	std::getline(std::cin, user_a);
 	if (user_a == "y")
@@ -47,7 +47,7 @@ int	main(void)
 	DiamondTrap	a("Edmond");
 	a.attack("Montagnier");
 	a.takeDamage(6);
-	test_energy(a, "Nameless(Pierre)", 50); // Energy test
+	test_energy(a, 50); // Energy test
 
 	std::cout <<"\n--Edmond2---" << std::endl;
 	DiamondTrap b(a);
