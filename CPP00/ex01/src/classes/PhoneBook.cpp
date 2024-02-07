@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 09:59:58 by jsousa-a          #+#    #+#             */
-/*   Updated: 2024/01/18 18:35:10 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:58:21 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,30 @@ void	PhoneBook::print_all(void)	const
 
 void	PhoneBook::search(void)	const
 {
-	int		i = -1;
+	int		i = 0;
 	std::string	u_input;
 
+	while (i < 8 && this->contact[i].index < 0)
+		i++;
+	if (i == 8)
+	{
+		std::cout << "No contacts in the book yet" << std::endl;
+		return;
+	}
 	this->print_all();
 	std::cout << "type index: " << std::endl;
 	std::getline(std::cin, u_input);
 	if (u_input.length() == 1 && u_input[0] > '0' && u_input[0] < '9')
 	{
-		while (++i < 8)
+		i = 0;
+		while (i < 8)
 		{
 			if (this->contact[i].index == u_input[0] - 48)
 			{
 				this->contact[i].print_contact();
 				break ;
 			}
+			i++;
 		}
 		if (i == 8)
 			std::cout << "contact not found" << std::endl;
