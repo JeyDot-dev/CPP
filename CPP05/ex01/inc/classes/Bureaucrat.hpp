@@ -11,6 +11,7 @@ public:
 	
 	Bureaucrat(std::string name, int grade);
 
+	void				signForm(Form &f) const;
 	std::string const&	getName() const;
 	int					getGrade() const;
 	void				incGrade();
@@ -24,7 +25,7 @@ private:
 	std::string const	_name;
 	int					_grade;
 
-public:
+private:
 
 	class GradeTooHighException : public std::exception
 	{

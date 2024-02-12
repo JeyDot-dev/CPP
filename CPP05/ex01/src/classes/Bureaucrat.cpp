@@ -6,13 +6,18 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:42:59 by jsousa-a          #+#    #+#             */
-/*   Updated: 2024/02/12 15:04:16 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:08:02 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
 
 //--------------Functions----------------//
-std::string const& Bureaucrat::getName() const
+//FINISH THIS FUNCTIOOOOOOOOOOOOOOOOOONNNNN!!!!!!!!!!!!!!!
+void				signForm(Form &f) const
+{
+	
+}
+std::string const&	Bureaucrat::getName() const
 {
 	return this->_name;
 }
