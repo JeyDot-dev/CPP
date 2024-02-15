@@ -6,16 +6,26 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:42:59 by jsousa-a          #+#    #+#             */
-/*   Updated: 2024/02/12 19:08:02 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:02:01 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 //--------------Functions----------------//
 //FINISH THIS FUNCTIOOOOOOOOOOOOOOOOOONNNNN!!!!!!!!!!!!!!!
-void				signForm(Form &f) const
+void				Bureaucrat::signForm(Form &f) const
 {
-	
+	try
+	{
+		f.beSigned(*this);
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+		std::cout	<< *this << ", grade required for "<< f.getName() << ": "
+					<< f.getSignReq() << "." << std::endl; 
+		throw GradeTooLowException();
+	}
 }
 std::string const&	Bureaucrat::getName() const
 {
@@ -77,11 +87,11 @@ Bureaucrat::~Bureaucrat(void)
 //--------------Exceptions------------//
 char const*	Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return "Grade is too high ( < than 1)";
+	return "Bureaucrat: Grade is too high";
 }
 char const*	Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return "Grade is too low ( > than 150)";
+	return "Bureaucrat: Grade is too low";
 }
 //--------------Non-Member--------------//
 std::ostream& operator<<(std::ostream& o, Bureaucrat const& rhs)

@@ -1,10 +1,18 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 //--------------Functions----------------//
 void	Form::beSigned(Bureaucrat const & b)
 {
 	if (b.getGrade() > this->getSignReq())
 		throw Form::GradeTooLowException();
+	if (this->_is_signed == true)
+		std::cout << "Form: " << this->getName() << " already signed." << std::endl;
+	else
+	{
+		std::cout << "Form: " << this->getName() << " has been signed by "
+		<< b.getName() << "." << std::endl;
+	}
 	this->_is_signed = true;
 }
 std::string const&	Form::getName() const
@@ -42,7 +50,7 @@ Form::Form(Form const &src) :
 {
 	if (this->getSignReq() < 1 || getExecReq() < 1)
 		throw Form::GradeTooHighException();
-	if (This->getSignReq() > 150 || getExecReq() > 150)
+	if (this->getSignReq() > 150 || getExecReq() > 150)
 		throw Form::GradeTooLowException();
 	std::cout << "Copy constructor called (Form)" << std::endl;
 	return ;
@@ -69,9 +77,9 @@ char const* Form::GradeTooHighException::what() const throw()
 {
 	return "Form: Grade too high.";
 }
-std::ostream& operator<<(ostream& o, Form const& rhs)
+std::ostream& operator<<(std::ostream& o, Form const& rhs)
 {
-	o << "Form: " << rhs.getName() << " | is_signed: " <<
+	return	o << "Form: " << rhs.getName() << " | is_signed: " <<
 		rhs.getIsSigned() << " | req grade(exec): " <<
 		rhs.getExecReq() << " | req grade(sign): " <<
 		rhs.getSignReq() << std::endl;

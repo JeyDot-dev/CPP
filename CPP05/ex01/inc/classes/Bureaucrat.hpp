@@ -2,6 +2,8 @@
 # define	BUREAUCRAT_HPP
 #include <iostream>
 
+class Form;
+
 class	Bureaucrat
 {
 
@@ -25,17 +27,16 @@ private:
 	std::string const	_name;
 	int					_grade;
 
-private:
-
+public://exceptions v
 	class GradeTooHighException : public std::exception
 	{
 		virtual const char*	what() const throw();
 	};
-
 	class GradeTooLowException : public std::exception
 	{
-		virtual const char* what() const throw();
+		virtual const char*	what() const throw();
 	};
+private:
 };
 std::ostream& operator<<(std::ostream& o, Bureaucrat const& rhs);
 #endif
