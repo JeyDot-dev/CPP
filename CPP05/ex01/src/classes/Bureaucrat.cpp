@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:42:59 by jsousa-a          #+#    #+#             */
-/*   Updated: 2024/02/15 16:02:01 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:14:00 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
@@ -23,8 +23,7 @@ void				Bureaucrat::signForm(Form &f) const
 	catch (Form::GradeTooLowException &e)
 	{
 		std::cout	<< *this << ", grade required for "<< f.getName() << ": "
-					<< f.getSignReq() << "." << std::endl; 
-		throw GradeTooLowException();
+					<< f.getSignReq() << ". (Bureaucrat's grade too low)" << std::endl; 
 	}
 }
 std::string const&	Bureaucrat::getName() const
@@ -96,5 +95,5 @@ char const*	Bureaucrat::GradeTooLowException::what() const throw()
 //--------------Non-Member--------------//
 std::ostream& operator<<(std::ostream& o, Bureaucrat const& rhs)
 {
-	return o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();
+	return o << rhs.getName() << ", grade " << rhs.getGrade();
 }
