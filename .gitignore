@@ -34,3 +34,5 @@
 tags
 
 CPP00/ex01/phonebook
+compile_commands.json
+*.idx
