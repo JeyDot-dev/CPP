@@ -1,33 +1,44 @@
 #include "PresidentialPardonForm.hpp"
 
 //--------------Functions----------------//
+void    PresidentialPardonForm::actuallyExecute(Bureaucrat const& executor) const
+{
+    (void) executor;
+    std::cout << *this << std::endl;
+}
 //--------------Operators----------------//
 PresidentialPardonForm&	PresidentialPardonForm::operator=(PresidentialPardonForm const&  rhs)
 {
 	if (this != &rhs)
-	{
-		//copy
-	}
-	std::cout << "Assignation operator called" << std::endl;
+        AForm::operator=(rhs);
 	return *this;
 }
 //--------------Constructors------------//
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src)
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src) :
+    AForm(src),
+    _target(src._target)
 {
-	*this = src;
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Copy constructor called (president)" << std::endl;
 	return ;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(void)
+PresidentialPardonForm::PresidentialPardonForm(std::string const& target) :
+    AForm("PresidentialPardonForm", 25, 5),
+    _target(target)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Init constructor called for (president)" << std::endl;
+	return ;
+}
+PresidentialPardonForm::PresidentialPardonForm(void) : AForm("PresidentialPardonForm", 25, 5),
+                                                    _target("def_target")
+{
+	std::cout << "Default constructor called for (president)" << std::endl;
 	return ;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor called (president)" << std::endl;
 	return ;
 }
 //--------------Non-Member--------------//

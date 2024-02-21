@@ -11,25 +11,34 @@
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int	main(void)
 {
-	Bureaucrat	a("Wilson", 30);
-	AForm		p_form;
+	Bureaucrat              a("Wilson", 30);
+    ShrubberyCreationForm   a_shrub("Capibara");
+    RobotomyRequestForm     a_robot("Wapiti");
+    PresidentialPardonForm  a_presid("Lama");
 
-	std::cout << "\n" << a << "\n" << p_form << std::endl;
+	std::cout << "\n" 
+                << a << "\n"
+                << a_shrub << "\n"
+                << a_robot << "\n"
+                << a_presid << "\n"<< std::endl;
 
 	try
 	{
-		a.signForm(p_form);
-		std::cout << p_form << std::endl;
+		a.signForm(a_shrub);
+		std::cout << a_shrub << std::endl;
 		a = Bureaucrat("Wilson_nul", 120);
-		a.signForm(p_form);
-		std::cout << p_form << std::endl;
+		a.signForm(a_shrub);
+		std::cout << a_shrub << std::endl;
 	}
 	catch (std::exception& e)
 	{
 		std::cout << e.what() << "\n" << std::endl;
 	}
-	std::cout << "\n"<<std::endl;
+	std::cout << std::endl;
 }

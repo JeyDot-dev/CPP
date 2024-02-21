@@ -82,5 +82,5 @@ std::ostream& operator<<(std::ostream& o, Form const& rhs)
 	return	o << "Form: " << rhs.getName() << " | is_signed: " <<
 		rhs.getIsSigned() << " | req grade(exec): " <<
 		rhs.getExecReq() << " | req grade(sign): " <<
-		rhs.getSignReq() << std::endl;
+		rhs.getSignReq();
 }
