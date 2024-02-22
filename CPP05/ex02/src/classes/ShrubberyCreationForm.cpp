@@ -1,10 +1,28 @@
 #include "ShrubberyCreationForm.hpp"
+#include <fstream>
 
 //--------------Functions----------------//
-void    ShrubberyCreationForm::actuallyExecute(Bureaucrat const& executor) const
+void    ShrubberyCreationForm::actuallyExecute() const
 {
-    (void) executor;
-    std::cout << *this << std::endl;
+    std::ofstream of;
+    of.open((this->_target + "_shrubbery").c_str(), std::ofstream::trunc);
+    if (of.is_open())
+    {
+        of << "       _-_\
+\n    /~~   ~~\\\
+\n /~~         ~~\\\
+\n{               }\
+\n \\  _-     -_  /\
+\n   ~  \\\\ //  ~\
+\n_- -   | | _- _\
+\n  _ -  | |   -_\
+\n      // \\\\\
+";
+    std::cout << "Shrubbery success at " << this->_target << "_shrubbery." << std::endl;
+    of.close();
+    }
+    else
+        std::cout << "Failed to open " << this->_target << "_shrubbery." << std::endl;
 }
 //--------------Operators----------------//
 ShrubberyCreationForm&	ShrubberyCreationForm::operator=(ShrubberyCreationForm const&  rhs)

@@ -13,6 +13,7 @@ public:
 	
 	Bureaucrat(std::string name, int grade);
 
+    void                executeForm(AForm const & form) const;
 	void				signForm(AForm &f) const;
 	std::string const&	getName() const;
 	int					getGrade() const;
@@ -30,10 +31,12 @@ private:
 public://exceptions v
 	class GradeTooHighException : public std::exception
 	{
+    public:
 		virtual const char*	what() const throw();
 	};
 	class GradeTooLowException : public std::exception
 	{
+    public:
 		virtual const char*	what() const throw();
 	};
 private:

@@ -26,7 +26,7 @@ public:
 	~AForm(void);
 
 private:
-	virtual void		actuallyExecute(Bureaucrat const& executor) const = 0;
+	virtual void		actuallyExecute() const = 0;
 	std::string const	_name;
 	bool				_is_signed;
 	int const			_sign_req;
@@ -35,17 +35,19 @@ private:
 public://exceptions v
     class FormNotSignedException : public std::exception
     {
+    public:
         virtual const char* what() const throw();
     };
 	class GradeTooHighException : public std::exception
 	{
+    public:
 		virtual const char*	what() const throw();
 	};
 	class GradeTooLowException : public std::exception
 	{
+    public:
 		virtual const char*	what() const throw();
 	};
-private: 
 };
 std::ostream& operator<<(std::ostream& o, AForm const& rhs);
 #endif

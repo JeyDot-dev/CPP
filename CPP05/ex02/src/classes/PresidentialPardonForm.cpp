@@ -1,10 +1,9 @@
 #include "PresidentialPardonForm.hpp"
 
 //--------------Functions----------------//
-void    PresidentialPardonForm::actuallyExecute(Bureaucrat const& executor) const
+void    PresidentialPardonForm::actuallyExecute() const
 {
-    (void) executor;
-    std::cout << *this << std::endl;
+    std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 //--------------Operators----------------//
 PresidentialPardonForm&	PresidentialPardonForm::operator=(PresidentialPardonForm const&  rhs)

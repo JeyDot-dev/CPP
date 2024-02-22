@@ -15,7 +15,7 @@ public:
 	~PresidentialPardonForm(void);
 
 private:
-	void		actuallyExecute(Bureaucrat const& executor) const;
+	void		actuallyExecute() const;
     std::string const   _target;
 
 };

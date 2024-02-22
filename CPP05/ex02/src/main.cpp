@@ -17,7 +17,7 @@
 
 int	main(void)
 {
-	Bureaucrat              a("Wilson", 30);
+	Bureaucrat              a("Wilson", 5);
     ShrubberyCreationForm   a_shrub("Capibara");
     RobotomyRequestForm     a_robot("Wapiti");
     PresidentialPardonForm  a_presid("Lama");
@@ -31,6 +31,11 @@ int	main(void)
 	try
 	{
 		a.signForm(a_shrub);
+        a.executeForm(a_shrub);
+	//	a.signForm(a_robot);
+        a.executeForm(a_robot);
+		a.signForm(a_presid);
+        a.executeForm(a_presid);
 		std::cout << a_shrub << std::endl;
 		a = Bureaucrat("Wilson_nul", 120);
 		a.signForm(a_shrub);

@@ -13,7 +13,27 @@
 #include "AForm.hpp"
 
 //--------------Functions----------------//
-//FINISH THIS FUNCTIOOOOOOOOOOOOOOOOOONNNNN!!!!!!!!!!!!!!!
+void                Bureaucrat::executeForm(AForm const& form) const
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << this->getName() << " executed " << form.getName() << "." << std::endl;
+    }
+    catch (AForm::GradeTooLowException &e)
+    {
+		std::cout	<< *this << ", grade required to execute "<< form.getName() << ": "
+					<< form.getExecReq() << ". (Bureaucrat's grade too low)" << std::endl;
+    }
+    catch (AForm::FormNotSignedException &e)
+    {
+        std::cout << this->getName() << " couldn't execute form " << form.getName() << ": " << e.what() << std::endl;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+}
 void				Bureaucrat::signForm(AForm &f) const
 {
 	try

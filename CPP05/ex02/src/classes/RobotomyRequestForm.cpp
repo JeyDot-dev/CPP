@@ -1,10 +1,12 @@
 #include "RobotomyRequestForm.hpp"
 
 //--------------Functions----------------//
-void    RobotomyRequestForm::actuallyExecute(Bureaucrat const& executor) const
+void    RobotomyRequestForm::actuallyExecute() const
 {
-    (void) executor;
-    std::cout << *this << std::endl;
+    if (clock() % 2)
+        std::cout << this->_target << " Has been robotomized successfully." << std::endl;
+    else
+        std::cout << "Robotomization failed." << std::endl;
 }
 //--------------Operators----------------//
 RobotomyRequestForm&	RobotomyRequestForm::operator=(RobotomyRequestForm const&  rhs)

@@ -1,6 +1,7 @@
 #ifndef		SHRUBBERYCREATIONFORM_HPP
 # define	SHRUBBERYCREATIONFORM_HPP
 #include    "AForm.hpp"
+#include    <fstream>
 
 class	ShrubberyCreationForm : public AForm
 {
@@ -15,7 +16,7 @@ public:
 	~ShrubberyCreationForm(void);
 
 private:
-	void		actuallyExecute(Bureaucrat const& executor) const;
+	void		actuallyExecute() const;
     std::string const   _target;
 
 };

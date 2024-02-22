@@ -21,7 +21,7 @@ void    AForm::execute(Bureaucrat const& executor) const
     if (executor.getGrade() > this->getExecReq())
         throw(GradeTooLowException());
 
-    actuallyExecute(executor);
+    actuallyExecute();
 }
 
 void	AForm::beSigned(Bureaucrat const & b)

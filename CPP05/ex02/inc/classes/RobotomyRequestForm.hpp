@@ -1,6 +1,7 @@
 #ifndef		ROBOTOMYREQUESTFORM_HPP
 # define	ROBOTOMYREQUESTFORM_HPP
 #include "AForm.hpp"
+#include <ctime>
 
 class	RobotomyRequestForm : public AForm
 {
@@ -15,7 +16,7 @@ public:
 	~RobotomyRequestForm(void);
 
 private:
-	void		actuallyExecute(Bureaucrat const& executor) const;
+	void		actuallyExecute() const;
     std::string const   _target;
 
 };
