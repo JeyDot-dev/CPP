@@ -21,6 +21,7 @@ AForm* Intern::makeForm(std::string const& type, std::string const& target) cons
         default:
             std::cout << type << " is not a valid form." << std::endl;
     }
+	throw(std::exception());
     return NULL;
 }
 //--------------Operators----------------//
