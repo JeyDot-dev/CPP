@@ -9,7 +9,7 @@ PUR	= \033[35m
 CYN	= \033[36m
 LGR	= \033[37m
 RST	= \033[0m
-NAME		:=	bureaucrats
+NAME		:=	scalar_conv
 UNAME_S 	:= $(shell uname -s)
 #---------------Directories----------------------
 SRC_D		:=	src/
@@ -104,6 +104,10 @@ fclean	:
 re		:	fclean all
 			echo "\033[5;33m \t\tALL RECOMPILED !!! $(RST)"
 test	:	all
+	echo "$(GRN) TESTING : ./$(NAME) 0 0.0 0.0f \"'0'\" \"\" 123 123.123 123.123f 2317913279719 1283982913721.0 $(RST)"
+			./$(NAME) 0 0.0 0.0f "'0'" "" 123 123.123 123.123f 2317913279719 1283982913721.0
+	echo "$(GRN)./$(NAME) +inf -inf +inff -inff nan nanf asdojo$(RST)"
+			./$(NAME) +inf -inf +inff -inff nan nanf asdojo
 
 setup	:	
 			mkdir -p inc/classes
