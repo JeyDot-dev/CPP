@@ -83,7 +83,7 @@ void ScalarConverter::convert(std::string const & str)
         else if (str.length() > 3 && ct_c(str, 'f') == 1 && str[str.length() - 1] == 'f')
         {
             float f = atof(str.c_str());
-            print_result(static_cast<char>(f), static_cast<char>(f), f, static_cast<double>(f));
+            print_result(static_cast<char>(f), static_cast<int>(f), f, static_cast<double>(f));
         }
     }
     else
