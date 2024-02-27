@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include <cctype>
 #include <iomanip>
 
 //--------------Functions----------------//
@@ -65,17 +66,25 @@ int ct_c(std::string const& str, char const& c)
         if (str[i] == c) ct++;
     return ct;
 }
+bool check_if_nb(std::string const & str)
+{
+    for (int i = 0; isdigit(str[i]) || str[i] == '.' || str[i] == 'f'; i++)
+        if (!str[i + 1]) return true; 
+    return false;
+}
 void ScalarConverter::convert(std::string const & str)
 {
     if (weird_maths(str))
         return ;
     else if (str.length() == 3 && str[0] == '\'' && str[2] == '\'') //        check if char
         print_result(str[1], static_cast<int>(str[1]), static_cast<float>(str[1]), static_cast<double>(str[1]));
-    else if (isdigit(str[0]) == false)
+    else if (check_if_nb(str) == false)
         std::cout << impossible(4) << std::endl;
-    else if (str.length() > 3 && ct_c(str, '.') == 1) //    check if floating point
+    else if (ct_c(str, '.') || ct_c(str, 'f')) //    check if floating point
     {
-        if (ct_c(str, 'f') == 0)
+        if (str.length() < 3 || ct_c(str, 'f') > 1 || ct_c(str, '.') > 1 || !ct_c(str, '.'))
+            std::cout << impossible(4) << std::endl;
+        else if (str.length() > 2 && ct_c(str, 'f') == 0)
         {
             double d = std::strtod(str.c_str(), NULL);
             print_result(static_cast<char>(d), static_cast<int>(d), static_cast<float>(d), d);
