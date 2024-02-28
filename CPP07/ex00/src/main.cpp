@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Tmain.hpp"
+#include "whatever.hpp"
 void subject_tests(void)
 {
     int a = 2;
