@@ -1,3 +1,5 @@
+#ifndef TMAIN_HPP
+# define TMAIN_HPP
 template <typename T>
 void        swap(T& a, T& b)
 {
@@ -13,3 +15,4 @@ T const&    max(T const& a, T const& b)
 {
     return a <= b ? b : a;
 }
+#endif
