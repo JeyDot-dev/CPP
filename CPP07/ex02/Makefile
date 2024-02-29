@@ -17,7 +17,7 @@ BUILD_D		:=	.build/
 LIB_D		:=	
 #---------------SRCs and Libs-(mac)\/--------------
 SRC			:=	main.cpp
-SRC_CLASSES	:=	Array.cpp
+SRC_CLASSES	:=	
 INC			:=	inc/ inc/classes/
 LIB			:=
 FRAMEWORK	:=
