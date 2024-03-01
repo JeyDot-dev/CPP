@@ -2,6 +2,7 @@
 #include <limits>
 #include <cstdlib>
 #include <algorithm>
+#include <vector>
 
 //--------------Functions----------------//
 bool    reverseSort(int a, int b);
@@ -65,7 +66,7 @@ Span::Span(Span const& src)
 {
     *this = src;
 }
-Span::Span(void)
+Span::Span(void) : _max(0), _content(std::vector<int>())
 {
 }
 Span::~Span(void)
