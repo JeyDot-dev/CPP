@@ -29,7 +29,7 @@ size_t  Span::shortestSpan()
         throw(LessThanTwoException());
     size_t span = std::numeric_limits<size_t>::max();
     std::sort(_content.begin(), _content.end(), reverseSort);
-    for (size_t i = 0; i < _max - 1; i++)
+    for (size_t i = 0; i < this->_content.size() - 1; i++)
     {
         if (static_cast<size_t>(_content[i]) - _content[i + 1] < span)
             span = static_cast<size_t>(_content[i]) - _content[i + 1];
