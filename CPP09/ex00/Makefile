@@ -91,7 +91,7 @@ clean	:
 	echo "$(CYN) \t\tALL CLEANED $(RST)"
 #----------------------------FCLEAN----------------------------------
 fclean	:
-	$(RM) $(OBJ) $(DEPS) *.log test
+	$(RM) $(OBJ) $(DEPS) *.log test data.csv
 	$(RM) $(NAME)
 #	$(MAKE) -C libft fclean
 #ifeq ($(UNAME_S),Darwin)
@@ -104,7 +104,8 @@ fclean	:
 re		:	fclean all
 			echo "\033[5;33m \t\tALL RECOMPILED !!! $(RST)"
 test	:	all
-			echo "date | value\
+			wget https://cdn.intra.42.fr/document/document/20227/cpp_09.tgz && tar -xzf cpp_09.tgz  && mv cpp_09/data.csv . && rm -rf cpp_09 cpp_09.tgz
+			echo "date | value\n\
 2009-01-01 | 2\n\
 2009-01-02 | 2.000132\n\
 2011-01-06 | 2\n\
