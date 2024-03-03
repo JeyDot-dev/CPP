@@ -153,7 +153,9 @@ BitcoinExchange::BitcoinExchange()
         try
         {
             while (std::getline(*fs, line))
-            _db.insert(std::pair<size_t, float>(findDate(line, ','), findValue(line, ',')));
+                _db.insert(std::pair<size_t, float>(findDate(line, ','), findValue(line, ',')));
+            fs->close();
+            delete fs;
         }
         catch(std::exception& e)
         {
@@ -161,13 +163,11 @@ BitcoinExchange::BitcoinExchange()
             delete fs;
             throw(e);
         }
-        fs->close();
-        delete fs;
     }
     catch(std::exception &e)
     {
         std::cout << "Something wrong in data file: " << e.what() << std::endl;
-        throw(BadDbException());
+        throw;
     }
 }
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &src) : _db(src._db)
