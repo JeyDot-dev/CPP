@@ -1,10 +1,12 @@
 #include "BitcoinExchange.hpp"
 #include <cstddef>
+#include <exception>
 #include <fstream>
 #include <string>
 #include <cstdlib>
 #include <utility>
 #include <algorithm>
+#include <iomanip>
 //  1Value too Large, 2ValueNegative, 3DateNotExist, 4BadFormat
 // BITCOIN 3 JAN 2009 ( d / 2008 > 0)
 //--------------Functions----------------//
@@ -16,6 +18,44 @@ void    BitcoinExchange::printMap(std::map<size_t, float> map) const
 void    BitcoinExchange::printDb() const
 {
     printMap(_db);
+}
+void    BitcoinExchange::outputPrice(char const* file, char const c) const
+{
+    std::ifstream*  ifs = openFile(file);
+    std::string     line;
+    std::cout << std::fixed;
+
+    while (std::getline(*ifs, line))
+    {
+        try
+        {
+            std::map<size_t, float>                     tmp = extractData(line, c);
+            size_t                                      key = tmp.begin()->first;
+            std::map<size_t, float>::const_iterator     l_bound = _db.lower_bound(key);
+            if      (l_bound->first > key && l_bound == _db.begin())
+                throw(DateNotExistException());
+            else if (l_bound->first > key || l_bound == _db.end())
+                l_bound--;
+            std::cout << line.substr(0, line.find_first_of(" |")) 
+                <<": " << std::setprecision(4) << tmp.begin()->second <<"BTC = " <<
+                std::setprecision(2) << tmp.begin()->second * l_bound->second << "$" << std::endl;
+        }
+        catch(DateNotExistException& e){
+            std::cerr << "Error: Date does not exist: " << line << std::endl;
+        }catch(BadDateFormatException& e){
+            std::cerr << "Error: Bad format (prob date): " << line << std::endl;
+        }catch(ValueTooLargeException& e){
+            std::cerr << "Error: Value too large: " << line << std::endl;
+        }catch(ValueNegativException& e){
+            std::cerr << "Error: Value negative: " << line << std::endl;
+        }catch(BadValueFormatException& e){
+            std::cerr << "Error: Bad value format: " << line << std::endl;
+        }catch(std::exception& e){
+            std::cerr << e.what() << std::endl;
+        }
+    }
+    ifs->close();
+    delete ifs;
 }
 size_t  BitcoinExchange::checkStupidDate(int date) const
 {
@@ -60,26 +100,24 @@ size_t  BitcoinExchange::findDate(std::string const& str, char const& c) const
 }
 float                       BitcoinExchange::findValue(std::string str, char const c) const
 {
-    std::string::iterator   end = str.end();
-    std::string::iterator   start;
     float                   ret;
     size_t                  pos_start = str.find(c);
 
-    if (pos_start == std::string::npos || pos_start + 1 == std::string::npos)
+    if (pos_start == std::string::npos || ++pos_start == std::string::npos)
         throw(BadValueFormatException()); 
-    pos_start++;
     pos_start = str.find_first_not_of(' ', pos_start);
     if (pos_start == std::string::npos)
         throw(BadValueFormatException());
-    start = str.begin() + pos_start;
-    std::advance(end, -1);
+    if (str[pos_start] == '-')
+        throw(ValueNegativException());
+
+    std::string::iterator   start = str.begin() + pos_start;
+    std::string::iterator   last_char = str.end() - 1;
     if (std::count(start, str.end(), '.') > 1
             || str.find_first_not_of("01234567889.", pos_start) != std::string::npos
-            ||  *end == '.')
+            ||  *last_char == '.')
         throw(BadValueFormatException());
     ret = atof(str.substr(pos_start, std::string::npos).c_str());
-    if (ret < 0)
-        throw(ValueNegativException());
     if (c == '|' && ret > 1000)
         throw(ValueTooLargeException());
     return ret;
@@ -87,7 +125,8 @@ float                       BitcoinExchange::findValue(std::string str, char con
 std::map<size_t, float>     BitcoinExchange::extractData(std::string str, char const c) const
 {
     std::map<size_t, float> ret;
-    ret.insert(std::pair<size_t, float>(findDate(str, c), findValue(str, c)));
+    size_t                  date = findDate(str, c);
+    ret.insert(std::pair<size_t, float>(date, findValue(str, c)));
     return ret;
 }
 std::ifstream*          BitcoinExchange::openFile(char const* file) const
@@ -98,18 +137,6 @@ std::ifstream*          BitcoinExchange::openFile(char const* file) const
         throw(BadFileException(iofile));
     return iofile;
 }
-/*
-std::map<size_t, float>    BitcoinExchange::parseFile(char const* file, char const delim) const
-{
-    std::ifstream*              iofile = openFile("data.csv");
-    std::map<size_t, float>     map;
-    std::string                 line;
-    while (iofile->good())
-    {
-        std::getline(*iofile, line);
-    }
-    return map;
-}*/
 //--------------Operators----------------//
 BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const&  rhs)
 {
@@ -145,10 +172,5 @@ BitcoinExchange::BitcoinExchange()
 }
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &src) : _db(src._db)
 {
-}
-
-BitcoinExchange::~BitcoinExchange(void)
-{
-    std::cout << "Market has collapsed (destructor)" << std::endl;
 }
 //--------------Non-Member--------------//

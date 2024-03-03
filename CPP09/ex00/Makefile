@@ -91,7 +91,7 @@ clean	:
 	echo "$(CYN) \t\tALL CLEANED $(RST)"
 #----------------------------FCLEAN----------------------------------
 fclean	:
-	$(RM) $(OBJ) $(DEPS)
+	$(RM) $(OBJ) $(DEPS) *.log test
 	$(RM) $(NAME)
 #	$(MAKE) -C libft fclean
 #ifeq ($(UNAME_S),Darwin)
@@ -104,6 +104,23 @@ fclean	:
 re		:	fclean all
 			echo "\033[5;33m \t\tALL RECOMPILED !!! $(RST)"
 test	:	all
+			echo "date | value\
+2009-01-01 | 2\n\
+2009-01-02 | 2.000132\n\
+2011-01-06 | 2\n\
+2011-01-07 | 2\n\
+2011-01-03 | 1\n\
+2011-01-03 | 1.2\n\
+2011-01-10 | 1\n\
+2012-01-11 | -1\n\
+2001-42-42\n\
+2012-01-11 | 1\n\
+2111-01-11 | 2.2232\n\
+2012-01-11 | 2147483648" > test &&\
+			./btc test 1> stdout.log 2> stderr.log &&\
+			echo "$(GRN)" && cat stdout.log &&\
+			echo "$(RED)" && cat stderr.log &&\
+			echo "$(RST)"
 
 setup	:	
 			mkdir -p inc/classes

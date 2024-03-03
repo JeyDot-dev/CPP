@@ -15,8 +15,9 @@ public:
 
     void    printMap(std::map<size_t, float> map) const;
     void    printDb() const;
+    void    outputPrice(char const* file, char const c = '|') const;
     
-	~BitcoinExchange(void);
+	~BitcoinExchange(void){}
 
 private:
     std::map<size_t, float>    _db;
