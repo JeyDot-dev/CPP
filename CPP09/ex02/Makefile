@@ -104,6 +104,7 @@ fclean	:
 re		:	fclean all
 			echo "\033[5;33m \t\tALL RECOMPILED !!! $(RST)"
 test	:	all
+			./PmergeMe `shuf -i 1-1000000 -n 100000 | tr "\n" " "`
 
 setup	:	
 			mkdir -p inc/classes

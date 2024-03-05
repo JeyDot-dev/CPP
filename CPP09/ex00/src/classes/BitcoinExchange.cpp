@@ -37,7 +37,7 @@ void    BitcoinExchange::outputPrice(char const* file, char const c) const
             else if (l_bound->first > key || l_bound == _db.end())
                 l_bound--;
             std::cout << line.substr(0, line.find_first_of(" |")) 
-                <<": " << std::setprecision(4) << tmp.begin()->second <<"BTC = " <<
+                <<" => " << std::setprecision(4) << tmp.begin()->second <<"BTC = " <<
                 std::setprecision(2) << tmp.begin()->second * l_bound->second << "$" << std::endl;
         }
         catch(DateNotExistException& e){
